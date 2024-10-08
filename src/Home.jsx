@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts } from './redux/productsReducer'
 import { addToCart, decrement, increment, removeFromCart } from './redux/cartReducer'
 import { Button } from "@/components/ui/button"
-import { Minus, Plus, Trash } from 'lucide-react'
+import { Loader, Minus, Plus, Trash } from 'lucide-react'
 
 const Home = () => {
   const products = useSelector(state => state.products.products)
@@ -27,7 +27,7 @@ const Home = () => {
     <div className={mode ? 'dark' : ''}>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 bg-background  text-foreground ">
-        {products.map(product => (
+        {!products.length ?<div className='min-h-screen flex justify-center items-center w-[95vw]'><Loader className='w-8 h-8 animate-spin text-foreground'/></div> : products.map(product => (
           <div key={product.id} className="border rounded-lg p-4 flex flex-col hover:scale-105 transition-all duration-150 ">
             <img
               src={product.images[0]}
